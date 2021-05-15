@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Student Enrollment form</title>
+	
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+	table{
+	border:4px; }</style>
+
+	
+</head>
+
+<body>
+	<form id = "myForm">
+		<table>
+			<tr>
+				<th>Name</th>
+				<th>Age</th>
+				<th>Grade</th>
+			</tr>
+			
+			<tr>
+				<td> <input type = "text" id = "Name" placeholder = "Enter your name"</td>
+				<td> <input type = "text" id = "Age" placeholder = "Enter your age"</td>
+				<td> <input type = "text" id = "Grade" placeholder = "Enter your grade" onblur = "addStudent()"</td>
+			</tr>
+		</table>
+		</form>
+	
+		<div id = "table"></div>
+	
+	<script>
+
+		let studentsArr = []; 
+		let myTable = document.querySelector('#table');
+		let headers = ['Name', 'Age', 'Grade'];
+		
+		function addStudent() {
+		let student = {
+		name: document.getElementById('Name').value,
+		age: document.getElementById('Age').value,
+		grade:document.getElementById('Grade').value
+		}
+		studentsArr.push(student); 
+		
+		document.forms[0].reset();
+		document.getElementById("Name").focus(); }	
+		
+		
+		document.getElementById('myForm').onkeydown = function(e){
+   if(e.keyCode == 13){
+   let table = document.createElement('table');
+    let headerRow = document.createElement('tr');
+ 
+    headers.forEach(headerText => {
+        let header = document.createElement('th');
+        let textNode = document.createTextNode(headerText);
+        header.appendChild(textNode);
+        headerRow.appendChild(header);
+    });
+ 
+    table.appendChild(headerRow);
+ 
+    studentsArr.forEach(emp => {
+        let row = document.createElement('tr');
+ 
+        Object.values(emp).forEach(text => {
+            let cell = document.createElement('td');
+            let textNode = document.createTextNode(text);
+            cell.appendChild(textNode);
+            row.appendChild(cell);
+        })
+ 
+        table.appendChild(row);
+    });
+ 
+    myTable.appendChild(table);
+   
+     
+}};
+     
+
+		
+	</script>
+</body>
+</html>
